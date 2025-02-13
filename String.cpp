@@ -41,7 +41,7 @@ String& String::Append(const String& _str) {
 	}
 
 	size += _str.size;
-	char* newString = new char[size];
+	char* newString = new char[size + 1];
 
 	strcpy(newString, string);
 	delete[] string;
@@ -92,17 +92,10 @@ int String::Replace(const char _find, const char _replace) {
 }
 
 String& String::ReadFromConsole() {
-	std::string str;
-	std::cin >> str;
+	std::string readBuffer;
+	std::getline(std::cin, readBuffer);
 
-	for (size_t i = 0; i < str.size(); ++i) {
-		string[i] = str[i];
-
-		if (string[i] == '\0') {
-			return *this;
-		}
-	}
-
+	Append(readBuffer.c_str());
 	return *this;
 }
 
@@ -134,6 +127,7 @@ char& String::operator[](size_t _index) {
 	if (_index > 0 && _index < size - 1) {
 		return string[_index];
 	}
+
 	return string[_index];
 }
 
@@ -141,9 +135,36 @@ const char& String::operator[](size_t _index) const {
 	if (_index > 0 && _index < size - 1) {
 		return string[_index];
 	}
+
 	return string[_index];
 }
 
+String& String::operator=(const String& _str) {
+	char* newString = new char[_str.size];
+	strcpy(newString, string);
+	delete string;
+
+	for (size_t i = 0; i < _str.size; ++i) {
+		newString[i] = _str[i];
+	}
+
+	string = newString;
+	return *this;
+}
+
+
+bool String::operator<(const String& _str) {
+	for (size_t i = 0; i < size; ++i) {
+		if (string[i] < _str[i]) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	return false;
+}
 
 
 

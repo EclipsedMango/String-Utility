@@ -2,6 +2,9 @@
 //
 
 #include "StringUtility.h"
+
+#include <iso646.h>
+
 #include "String.h"
 
 using namespace std;
@@ -33,6 +36,13 @@ int main() {
 	text.ToLower();
 	text.Replace('l', 'j');
 	text.WriteToConsole();
+	std::cout << "\n";
+
+	std::cout << "Type something! \n";
+	String newText;
+	newText.ReadFromConsole();
+	newText.ToUpper();
+	newText.WriteToConsole();
 
 	return 0;
 }
