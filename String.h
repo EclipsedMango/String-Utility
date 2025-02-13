@@ -26,6 +26,7 @@ public:
 	String& WriteToConsole();
 
 	bool operator==(const String& _other);
+	bool operator!=(const String& _other);
 	
 	char& operator[](size_t _index);
 	const char& operator[](size_t _index) const;

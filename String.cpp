@@ -135,7 +135,22 @@ bool String::operator==(const String& _other) {
 		return false;
 	}
 
-	for (size_t i = 0; i < size + _other.size; ++i) {
+	for (size_t i = 0; i < _other.size; ++i) {
+		if (string[i] == _other.string[i]) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+// Goes through each character and compares them then returns false if characters don't match.
+bool String::operator!=(const String& _other) {
+	if (string == nullptr) {
+		return false;
+	}
+
+	for (size_t i = 0; i < _other.size; ++i) {
 		if (string[i] != _other.string[i]) {
 			return false;
 		}
@@ -144,20 +159,22 @@ bool String::operator==(const String& _other) {
 	return true;
 }
 
+// Finds the character at index, returns Null Terminated if index is too big or small.
 char& String::operator[](size_t _index) {
 	if (_index > 0 && _index < size - 1) {
 		return string[_index];
 	}
 
-	return string[_index];
+	return string['\0'];
 }
 
+// Finds the character at index, returns Null Terminated if index is too big or small.
 const char& String::operator[](size_t _index) const {
 	if (_index > 0 && _index < size - 1) {
 		return string[_index];
 	}
 
-	return string[_index];
+	return string['\0'];
 }
 
 // Set each character to the second string and return.
