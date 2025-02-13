@@ -36,13 +36,18 @@ size_t String::Length() const {
 
 // Check the size of the string, add to it if needed and add the other string.
 String& String::Append(const String& _str) {
-	if (sizeof(string) > size + _str.size + 1) {
+	if (string == nullptr || _str.size < 1) {
 		return *this;
 	}
 
-	strcat(string, _str.string);
 	size += _str.size;
+	char* newString = new char[size];
 
+	strcpy(newString, string);
+	delete[] string;
+
+	strcat(newString, _str.string);
+	string = newString;
 	return *this;
 }
 
@@ -103,14 +108,42 @@ String& String::ReadFromConsole() {
 
 // Iterates through characters and writes them to console until null termination character.
 String& String::WriteToConsole() {
-	for (size_t i = 0; i < strlen(string); ++i) {
-		std::cout << string[i];
-
-		if (string[i] == '\0') {
-			return *this;
-		}
+	if (string == nullptr) {
+		return *this;
 	}
+
+	std::cout << string;
 	return *this;
 }
+
+bool String::operator==(const String& _other) {
+	if (string == nullptr) {
+		return false;
+	}
+
+	for (size_t i = 0; i < size + _other.size; ++i) {
+		if (string[i] != _other.string[i]) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+char& String::operator[](size_t _index) {
+	if (_index > 0 && _index < size - 1) {
+		return string[_index];
+	}
+	return string[_index];
+}
+
+const char& String::operator[](size_t _index) const {
+	if (_index > 0 && _index < size - 1) {
+		return string[_index];
+	}
+	return string[_index];
+}
+
+
 
 
