@@ -92,10 +92,23 @@ int String::Replace(const char _find, const char _replace) {
 }
 
 String& String::ReadFromConsole() {
-	std::string readBuffer;
-	std::getline(std::cin, readBuffer);
+	std::cin.ignore(std::cin.rdbuf()->in_avail());
+	std::cin.rdbuf()->sgetc();
+	std::streamsize bufferSize = std::cin.rdbuf()->in_avail();
 
-	Append(readBuffer.c_str());
+	char* newString = new char[bufferSize];
+	for (std::streamsize i = 0; i < bufferSize - 1; ++i) {
+		newString[i] = std::cin.rdbuf()->sbumpc();
+	}
+	newString[bufferSize - 1] = '\0';
+
+	if (string == nullptr) {
+		string = newString;
+		size = bufferSize - 1;
+	} else {
+		Append(newString);
+	}
+
 	return *this;
 }
 

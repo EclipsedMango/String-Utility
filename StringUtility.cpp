@@ -18,31 +18,25 @@ int main() {
 	text.WriteToConsole();
 	std::cout << "\n";
 
-	text.ToLower();
-	text.WriteToConsole();
+	text.ToLower().WriteToConsole();
 	std::cout << "\n";
 
-	text.ToUpper();
-	text.WriteToConsole();
+	text.ToUpper().WriteToConsole();
 	std::cout << "\n";
 
-	originalText.Append(" I Appended this!");
-	originalText.WriteToConsole();
+	originalText.Append(" I Appended this!").WriteToConsole();
 	std::cout << "\n";
 
 	std::cout << "Character W is at index: " << originalText.FindCharacter('W') << "\n";
 	std::cout << "Character K is at index: " << originalText.FindCharacter('K') << "\n";
 
-	text.ToLower();
-	text.Replace('l', 'j');
+	text.ToLower().Replace('l', 'j');
 	text.WriteToConsole();
 	std::cout << "\n";
 
 	std::cout << "Type something! \n";
 	String newText;
-	newText.ReadFromConsole();
-	newText.ToUpper();
-	newText.WriteToConsole();
+	newText.ReadFromConsole().ToUpper().WriteToConsole();
 
 	return 0;
 }
