@@ -37,6 +37,11 @@ int main() {
 	std::cout << "Type something! \n";
 	String newText;
 	newText.ReadFromConsole().ToUpper().WriteToConsole();
+	std::cout << "\n";
+
+	text = newText;
+	std::cout << "Text now equals what you typed! ";
+	text.WriteToConsole();
 
 	return 0;
 }

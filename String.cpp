@@ -80,7 +80,7 @@ int String::FindCharacter(const char _chr) {
 	return -1;
 }
 
-
+// If the characters exist in the string then replace them.
 int String::Replace(const char _find, const char _replace) {
 	for (size_t i = 0; i < size; ++i) {
 		if (string[i] == _find) {
@@ -91,17 +91,24 @@ int String::Replace(const char _find, const char _replace) {
 	return -1;
 }
 
+
+// Reads console buffer and makes a new string based off of that.
 String& String::ReadFromConsole() {
+	// Clear buffer.
 	std::cin.ignore(std::cin.rdbuf()->in_avail());
+
+	// Get characters at buffer, get the size of buffer.
 	std::cin.rdbuf()->sgetc();
 	std::streamsize bufferSize = std::cin.rdbuf()->in_avail();
 
+	// Make a new string based on the characters in the buffer and the buffers size.
 	char* newString = new char[bufferSize];
 	for (std::streamsize i = 0; i < bufferSize - 1; ++i) {
 		newString[i] = std::cin.rdbuf()->sbumpc();
 	}
 	newString[bufferSize - 1] = '\0';
 
+	// if string is null then make a new string otherwise append.
 	if (string == nullptr) {
 		string = newString;
 		size = bufferSize - 1;
@@ -122,6 +129,7 @@ String& String::WriteToConsole() {
 	return *this;
 }
 
+// Goes through each character and compares them then returns false if characters don't match.
 bool String::operator==(const String& _other) {
 	if (string == nullptr) {
 		return false;
@@ -152,20 +160,24 @@ const char& String::operator[](size_t _index) const {
 	return string[_index];
 }
 
+// Set each character to the second string and return.
 String& String::operator=(const String& _str) {
-	char* newString = new char[_str.size];
-	strcpy(newString, string);
-	delete string;
-
-	for (size_t i = 0; i < _str.size; ++i) {
-		newString[i] = _str[i];
+	if (string != nullptr) {
+		delete[] string;
 	}
 
-	string = newString;
+	string = new char[_str.size + 1];
+	size = _str.size;
+
+	for (size_t i = 0; i < _str.size; ++i) {
+		string[i] = _str[i];
+	}
+
+	string[size] = '\0';
 	return *this;
 }
 
-
+// Compare each char to each other in alphabetical order return true if right char is lower.
 bool String::operator<(const String& _str) {
 	for (size_t i = 0; i < size; ++i) {
 		if (string[i] < _str[i]) {
