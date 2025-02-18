@@ -24,7 +24,8 @@ int main() {
 	std::cout << "Character W is at index: " << originalText.FindCharacter('W') << "\n";
 	std::cout << "Character K is at index: " << originalText.FindCharacter('K') << "\n";
 
-	text.ToLower().Replace('l', 'j');
+	std::cout << text.ToLower().Replace('l', 'j');
+	std::cout << "\n";
 	text.WriteToConsole();
 	std::cout << "\n";
 

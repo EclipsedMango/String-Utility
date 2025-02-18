@@ -13,6 +13,10 @@ String::String() {
 
 // Copy the string to _other.
 String::String(const String& _other) {
+	if (_other.string == nullptr) {
+		return;
+	}
+
 	size = _other.size;
 	string = new char[size + 1];
 
@@ -36,7 +40,7 @@ size_t String::Length() const {
 
 // Check the size of the string, add to it if needed and add the other string.
 String& String::Append(const String& _str) {
-	if (string == nullptr || _str.size < 1) {
+	if (_str.size < 1) {
 		return *this;
 	}
 
@@ -44,7 +48,9 @@ String& String::Append(const String& _str) {
 	char* newString = new char[size + 1];
 
 	strcpy(newString, string);
-	delete[] string;
+	if (string != nullptr) {
+		delete[] string;
+	}
 
 	strcat(newString, _str.string);
 	string = newString;
@@ -82,15 +88,17 @@ int String::FindCharacter(const char _chr) {
 
 // If the characters exist in the string then replace them.
 int String::Replace(const char _find, const char _replace) {
+	int replaceCounter = 0;
+
 	for (size_t i = 0; i < size; ++i) {
 		if (string[i] == _find) {
+			++replaceCounter;
 			string[i] = _replace;
 		}
 	}
 
-	return -1;
+	return replaceCounter;
 }
-
 
 // Reads console buffer and makes a new string based off of that.
 String& String::ReadFromConsole() {
@@ -114,6 +122,7 @@ String& String::ReadFromConsole() {
 		size = bufferSize - 1;
 	} else {
 		Append(newString);
+		delete[] newString;
 	}
 
 	return *this;
@@ -130,14 +139,16 @@ String& String::WriteToConsole() {
 }
 
 // Goes through each character and compares them then returns false if characters don't match.
-bool String::operator==(const String& _other) {
-	if (string == nullptr) {
+bool String::operator==(const String& _other) const {
+	if (string == nullptr || _other.string == nullptr) {
 		return false;
 	}
 
 	for (size_t i = 0; i < _other.size; ++i) {
-		if (string[i] == _other.string[i]) {
-			return true;
+		if (string[i] != '\0' && _other.string[i] != '\0') {
+			if (string[i] == _other.string[i]) {
+				return true;
+			}
 		}
 	}
 
@@ -145,14 +156,16 @@ bool String::operator==(const String& _other) {
 }
 
 // Goes through each character and compares them then returns false if characters don't match.
-bool String::operator!=(const String& _other) {
-	if (string == nullptr) {
+bool String::operator!=(const String& _other) const {
+	if (string == nullptr || _other.string == nullptr) {
 		return false;
 	}
 
 	for (size_t i = 0; i < _other.size; ++i) {
-		if (string[i] != _other.string[i]) {
-			return false;
+		if (string[i] != '\0' && _other.string[i] != '\0') {
+			if (string[i] != _other.string[i]) {
+				return false;
+			}
 		}
 	}
 
@@ -165,7 +178,7 @@ char& String::operator[](size_t _index) {
 		return string[_index];
 	}
 
-	return string['\0'];
+	return string[size];
 }
 
 // Finds the character at index, returns Null Terminated if index is too big or small.
@@ -174,13 +187,17 @@ const char& String::operator[](size_t _index) const {
 		return string[_index];
 	}
 
-	return string['\0'];
+	return string[size];
 }
 
 // Set each character to the second string and return.
 String& String::operator=(const String& _str) {
 	if (string != nullptr) {
 		delete[] string;
+	}
+
+	if (string == _str.string) {
+		return *this;
 	}
 
 	string = new char[_str.size + 1];
@@ -196,12 +213,18 @@ String& String::operator=(const String& _str) {
 
 // Compare each char to each other in alphabetical order return true if right char is lower.
 bool String::operator<(const String& _str) {
+	if (string == nullptr || _str.string == nullptr) {
+		return false;
+	}
+
 	for (size_t i = 0; i < size; ++i) {
-		if (string[i] < _str[i]) {
-			return true;
-		}
-		else {
-			return false;
+		if (string[i] != '\0' && _str[i] != '\0') {
+			if (string[i] < _str[i]) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 	}
 
