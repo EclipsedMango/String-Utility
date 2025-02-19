@@ -11,6 +11,10 @@ int StringTest::runTests() {
 	testTemplate("Replace Character Test: ", replaceTest());
 	testTemplate("Read From Console Test: ", readFromConsoleTest());
 	testTemplate("Write To Console Test: ", writeToConsoleTest());
+	testTemplate("Equality Operator Test: ", doubleEqualsTest());
+	testTemplate("Subscript Operator Test: ", subscriptTest());
+	testTemplate("Assignment Operator Test: ", AssignmentTest());
+	testTemplate("Less Than Operator Test: ", lessThanTest());
 
 	return 0;
 }
@@ -116,11 +120,11 @@ bool StringTest::subscriptTest() {
 
 bool StringTest::AssignmentTest() {
 	string = "test";
-	if (string != "test"){
-		return false;
+	if (string == "test"){
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 bool StringTest::lessThanTest() {
@@ -130,6 +134,3 @@ bool StringTest::lessThanTest() {
 
 	return true;
 }
-
-
-
