@@ -7,6 +7,8 @@ int StringTest::runTests() {
 	testTemplate("Append Test: ", appendTest());
 	testTemplate("ToLower Test: ", toLowerTest());
 	testTemplate("ToUpper Test: ", toUpperTest());
+	testTemplate("Find Character Test: ", findCharacterTest());
+	testTemplate("Replace Character Test: ", replaceTest());
 
 	return 0;
 }
@@ -49,6 +51,26 @@ bool StringTest::toLowerTest() {
 bool StringTest::toUpperTest() {
 	string.ToUpper();
 	if (string != "TEST HELLO") {
+		return false;
+	}
+
+	return true;
+}
+
+bool StringTest::findCharacterTest() {
+	if (string.FindCharacter('T') != 0) {
+		return false;
+	}
+
+	if (string.FindCharacter('K') == 1) {
+		return false;
+	}
+
+	return true;
+}
+
+bool StringTest::replaceTest() {
+	if (string.Replace('L', 'J') != 2) {
 		return false;
 	}
 
