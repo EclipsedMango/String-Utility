@@ -2,6 +2,11 @@
 
 #include <iostream>
 
+#define RED "\033[38;5;196m"
+#define GREEN "\033[38;5;46m"
+#define BLUE "\033[38;5;51m"
+#define WHITE "\033[38;5;255m"
+
 int StringTest::runTests() {
 	testTemplate("Length Test: ", lengthTest(4));
 	testTemplate("Append Test: ", appendTest());
@@ -22,9 +27,9 @@ int StringTest::runTests() {
 void StringTest::testTemplate(std::string msg, bool condition) {
 	std::cout << msg;
 	if (condition) {
-		std::cout << "Passed.\n";
+		std::cout << GREEN << "Passed." << WHITE << "\n";
 	} else {
-		std::cout << "Failed.\n";
+		std::cout << RED << "Failed." << WHITE << "\n";
 	}
 }
 
@@ -94,10 +99,13 @@ bool StringTest::readFromConsoleTest(){
 }
 
 bool StringTest::writeToConsoleTest() {
+	std::cout << BLUE;
 	if (string.WriteToConsole() != "TEST HEJJOtest") {
+		std::cout << WHITE;
 		return false;
 	}
 
+	std::cout << WHITE;
 	std::cout << "\n";
 	return true;
 }

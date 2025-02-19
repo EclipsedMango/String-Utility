@@ -2,6 +2,9 @@
 #include "String.h"
 #include "StringTest.h"
 
+#define GOLD "\033[38;5;220m"
+#define WHITE "\033[38;5;255m"
+
 using namespace std;
 
 int main() {
@@ -60,7 +63,7 @@ int main() {
 	std::cout << "All tests are finished good job!\n";
 	std::cout << "\n";
 
-	std::cout << "Starting Unit tests.\n";
+	std::cout << GOLD << "Starting Unit tests." << WHITE << "\n";
 	StringTest *stringTest = new StringTest;
 
 	stringTest->runTests();
