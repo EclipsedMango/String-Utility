@@ -174,7 +174,7 @@ bool String::operator!=(const String& _other) const {
 
 // Finds the character at index, returns Null Terminated if index is too big or small.
 char& String::operator[](size_t _index) {
-	if (_index > 0 && _index < size - 1) {
+	if (_index > 0 && _index <= size - 1) {
 		return string[_index];
 	}
 
@@ -183,7 +183,7 @@ char& String::operator[](size_t _index) {
 
 // Finds the character at index, returns Null Terminated if index is too big or small.
 const char& String::operator[](size_t _index) const {
-	if (_index > 0 && _index < size - 1) {
+	if (_index > 0 && _index <= size - 1) {
 		return string[_index];
 	}
 

@@ -1,5 +1,6 @@
 ﻿#include "StringUtility.h"
 #include "String.h"
+#include "StringTest.h"
 
 using namespace std;
 
@@ -57,6 +58,12 @@ int main() {
 	}
 
 	std::cout << "All tests are finished good job!\n";
+	std::cout << "\n";
+
+	std::cout << "Starting Unit tests.\n";
+	StringTest *stringTest = new StringTest;
+
+	stringTest->runTests();
 
 	return 0;
 }
