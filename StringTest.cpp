@@ -9,6 +9,8 @@ int StringTest::runTests() {
 	testTemplate("ToUpper Test: ", toUpperTest());
 	testTemplate("Find Character Test: ", findCharacterTest());
 	testTemplate("Replace Character Test: ", replaceTest());
+	testTemplate("Read From Console Test: ", readFromConsoleTest());
+	testTemplate("Write To Console Test: ", writeToConsoleTest());
 
 	return 0;
 }
@@ -76,3 +78,23 @@ bool StringTest::replaceTest() {
 
 	return true;
 }
+
+bool StringTest::readFromConsoleTest(){
+	std::cout << "Type test.\n";
+	string.ReadFromConsole();
+	if (string != "TEST HEJJOtest") {
+		return false;
+	}
+
+	return true;
+}
+
+bool StringTest::writeToConsoleTest() {
+	if (string.WriteToConsole() != "TEST HEJJOtest") {
+		return false;
+	}
+
+	std::cout << "\n";
+	return true;
+}
+
