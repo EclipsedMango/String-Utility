@@ -98,3 +98,19 @@ bool StringTest::writeToConsoleTest() {
 	return true;
 }
 
+bool StringTest::doubleEqualsTest() {
+	if (string != "TEST HEJJOtest") {
+		return false;
+	}
+
+	return true;
+}
+
+bool StringTest::subscriptTest() {
+	if (string[3] != 'T') {
+		return false;
+	}
+
+	return true;
+}
+
