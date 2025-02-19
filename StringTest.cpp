@@ -5,6 +5,8 @@
 int StringTest::runTests() {
 	testTemplate("Length Test: ", lengthTest(4));
 	testTemplate("Append Test: ", appendTest());
+	testTemplate("ToLower Test: ", toLowerTest());
+	testTemplate("ToUpper Test: ", toUpperTest());
 
 	return 0;
 }
@@ -29,6 +31,24 @@ bool StringTest::lengthTest(int index) {
 bool StringTest::appendTest() {
 	string.Append("Hello");
 	if (string != "Test Hello") {
+		return false;
+	}
+
+	return true;
+}
+
+bool StringTest::toLowerTest() {
+	string.ToLower();
+	if (string != "test hello") {
+		return false;
+	}
+
+	return true;
+}
+
+bool StringTest::toUpperTest() {
+	string.ToUpper();
+	if (string != "TEST HELLO") {
 		return false;
 	}
 
