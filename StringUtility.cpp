@@ -63,10 +63,16 @@ int main() {
 	std::cout << "All tests are finished good job!\n";
 	std::cout << "\n";
 
-	std::cout << GOLD << "Starting Unit tests." << WHITE << "\n";
-	StringTest *stringTest = new StringTest;
+	std::cout << "Run unit tests? (Will save to a file). y/n\n";
+	String newStr;
+	newStr.ReadFromConsole();
 
-	stringTest->runTests();
+	if (newStr == "y") {
+		std::cout << GOLD << "Starting Unit tests." << WHITE << "\n";
+		StringTest* stringTest = new StringTest;
+
+		stringTest->runTests();
+	}
 
 	return 0;
 }

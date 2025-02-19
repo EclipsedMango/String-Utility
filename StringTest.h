@@ -9,8 +9,10 @@ public:
 
 private:
 	String string = "Test";
+	int numberOfTests = 11;
 
 	void testTemplate(std::string msg, bool condition);
+	void saveToFile();
 
 	bool lengthTest(int index);
 	bool appendTest();

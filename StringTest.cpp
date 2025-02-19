@@ -1,6 +1,7 @@
 #include "StringTest.h"
 
 #include <iostream>
+#include <fstream>
 
 #define RED "\033[38;5;196m"
 #define GREEN "\033[38;5;46m"
@@ -31,6 +32,20 @@ void StringTest::testTemplate(std::string msg, bool condition) {
 	} else {
 		std::cout << RED << "Failed." << WHITE << "\n";
 	}
+}
+
+void StringTest::saveToFile() {
+	std::ofstream MyFile("StringUtilityTestResults.txt");
+
+	time_t myTime = time(nullptr);
+
+	MyFile << "Date: " << std::ctime(&myTime) << " Success Rate: " << "xx.xx%";
+
+	for (int i = 0; i < numberOfTests; ++i) {
+		MyFile << "Test " << i << "";
+	}
+
+	MyFile.close();
 }
 
 bool StringTest::lengthTest(int index) {
