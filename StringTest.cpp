@@ -114,3 +114,22 @@ bool StringTest::subscriptTest() {
 	return true;
 }
 
+bool StringTest::AssignmentTest() {
+	string = "test";
+	if (string != "test"){
+		return false;
+	}
+
+	return true;
+}
+
+bool StringTest::lessThanTest() {
+	if (string < "abce") {
+		return false;
+	}
+
+	return true;
+}
+
+
+
