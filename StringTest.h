@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 #include "String.h"
 
@@ -9,7 +10,11 @@ public:
 
 private:
 	String string = "Test";
-	int numberOfTests = 11;
+	float numberOfTests = 12;
+	float testSucceeds = 0;
+
+	std::vector<std::string> strings;
+	std::vector<bool> boolVector;
 
 	void testTemplate(std::string msg, bool condition);
 	void saveToFile();

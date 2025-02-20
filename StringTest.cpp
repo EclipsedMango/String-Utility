@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 
 #define RED "\033[38;5;196m"
 #define GREEN "\033[38;5;46m"
@@ -9,6 +10,7 @@
 #define WHITE "\033[38;5;255m"
 
 int StringTest::runTests() {
+	testSucceeds = 0;
 	testTemplate("Length Test: ", lengthTest(4));
 	testTemplate("Append Test: ", appendTest());
 	testTemplate("ToLower Test: ", toLowerTest());
@@ -22,30 +24,50 @@ int StringTest::runTests() {
 	testTemplate("Assignment Operator Test: ", AssignmentTest());
 	testTemplate("Less Than Operator Test: ", lessThanTest());
 
+	saveToFile();
+
 	return 0;
 }
 
 void StringTest::testTemplate(std::string msg, bool condition) {
 	std::cout << msg;
 	if (condition) {
+		testSucceeds += 1;
 		std::cout << GREEN << "Passed." << WHITE << "\n";
 	} else {
 		std::cout << RED << "Failed." << WHITE << "\n";
 	}
+
+	strings.push_back(msg);
+	boolVector.push_back(condition);
 }
 
 void StringTest::saveToFile() {
-	std::ofstream MyFile("StringUtilityTestResults.txt");
+	std::ofstream MyFile;
+	MyFile.open("C:/Users/s242072/source/repos/String Utility/StringUtilityTestResults.txt", std::ofstream::app);
 
 	time_t myTime = time(nullptr);
+	std::tm tm = *std::localtime(&myTime);
 
-	MyFile << "Date: " << std::ctime(&myTime) << " Success Rate: " << "xx.xx%";
+	float percent = testSucceeds / numberOfTests * 100;
 
-	for (int i = 0; i < numberOfTests; ++i) {
-		MyFile << "Test " << i << "";
+	MyFile << "Date: " << std::put_time(&tm, "%d/%m/%y ") << "Time: " << std::put_time(&tm, "%H:%M:%S ") << 
+		"Success Rate: " << std::setprecision(3) << percent << "%" << "\n";
+
+	for (int i = 0; i < 12; ++i) {
+		MyFile << "Test " << i << " " << strings[i];
+
+		if (boolVector[i]) {
+			MyFile << "Successful\n";
+		} else {
+			MyFile << "Failed\n";
+		}
 	}
 
+	MyFile << '\n';
 	MyFile.close();
+
+	std::cout << "Wrote to file.\n";
 }
 
 bool StringTest::lengthTest(int index) {

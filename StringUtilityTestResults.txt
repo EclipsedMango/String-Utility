@@ -1,0 +1,28 @@
+Date: 20/02/25 Time: 11:11:13 Success Rate: 91.7%
+Test 0 Length Test: Failed
+Test 1 Append Test: Successful
+Test 2 ToLower Test: Successful
+Test 3 ToUpper Test: Successful
+Test 4 Find Character Test: Successful
+Test 5 Replace Character Test: Successful
+Test 6 Read From Console Test: Successful
+Test 7 Write To Console Test: Successful
+Test 8 Equality Operator Test: Successful
+Test 9 Subscript Operator Test: Successful
+Test 10 Assignment Operator Test: Successful
+Test 11 Less Than Operator Test: Successful
+
+Date: 20/02/25 Time: 11:11:24 Success Rate: 100%
+Test 0 Length Test: Successful
+Test 1 Append Test: Successful
+Test 2 ToLower Test: Successful
+Test 3 ToUpper Test: Successful
+Test 4 Find Character Test: Successful
+Test 5 Replace Character Test: Successful
+Test 6 Read From Console Test: Successful
+Test 7 Write To Console Test: Successful
+Test 8 Equality Operator Test: Successful
+Test 9 Subscript Operator Test: Successful
+Test 10 Assignment Operator Test: Successful
+Test 11 Less Than Operator Test: Successful
+
