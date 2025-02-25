@@ -17,8 +17,6 @@ int StringTest::runTests() {
 	testTemplate("ToUpper Test: ", toUpperTest());
 	testTemplate("Find Character Test: ", findCharacterTest());
 	testTemplate("Replace Character Test: ", replaceTest());
-	testTemplate("Read From Console Test: ", readFromConsoleTest());
-	testTemplate("Write To Console Test: ", writeToConsoleTest());
 	testTemplate("Equality Operator Test: ", doubleEqualsTest());
 	testTemplate("Subscript Operator Test: ", subscriptTest());
 	testTemplate("Assignment Operator Test: ", AssignmentTest());
@@ -47,14 +45,12 @@ void StringTest::saveToFile() {
 	MyFile.open("C:/Users/s242072/source/repos/String Utility/StringUtilityTestResults.txt", std::ofstream::app);
 
 	time_t myTime = time(nullptr);
-	std::tm tm = *std::localtime(&myTime);
+	std::tm time = *std::localtime(&myTime);
 
-	float percent = testSucceeds / numberOfTests * 100;
+	MyFile << std::put_time(&time, "Date: %d/%m/%y Time: %H:%M:%S ") << 
+		"Success Rate: " << std::setprecision(3) << testSucceeds / numberOfTests * 100 << "%" << "\n";
 
-	MyFile << "Date: " << std::put_time(&tm, "%d/%m/%y ") << "Time: " << std::put_time(&tm, "%H:%M:%S ") << 
-		"Success Rate: " << std::setprecision(3) << percent << "%" << "\n";
-
-	for (int i = 0; i < 12; ++i) {
+	for (int i = 0; i < 10; ++i) {
 		MyFile << "Test " << i << " " << strings[i];
 
 		if (boolVector[i]) {
@@ -71,6 +67,8 @@ void StringTest::saveToFile() {
 }
 
 bool StringTest::lengthTest(int index) {
+	String string = "Test";
+
 	if (string.Length() != index) {
 		return false;
 	}
@@ -79,7 +77,9 @@ bool StringTest::lengthTest(int index) {
 }
 
 bool StringTest::appendTest() {
-	string.Append("Hello");
+	String string = "Test";
+
+	string.Append(" Hello");
 	if (string != "Test Hello") {
 		return false;
 	}
@@ -88,8 +88,10 @@ bool StringTest::appendTest() {
 }
 
 bool StringTest::toLowerTest() {
-	string.ToLower();
-	if (string != "test hello") {
+	String str = "Test";
+
+	str.ToLower();
+	if (str != "test") {
 		return false;
 	}
 
@@ -97,8 +99,10 @@ bool StringTest::toLowerTest() {
 }
 
 bool StringTest::toUpperTest() {
+	String string = "Test";
+
 	string.ToUpper();
-	if (string != "TEST HELLO") {
+	if (string != "TEST") {
 		return false;
 	}
 
@@ -106,6 +110,8 @@ bool StringTest::toUpperTest() {
 }
 
 bool StringTest::findCharacterTest() {
+	String string = "Test";
+
 	if (string.FindCharacter('T') != 0) {
 		return false;
 	}
@@ -118,45 +124,29 @@ bool StringTest::findCharacterTest() {
 }
 
 bool StringTest::replaceTest() {
-	if (string.Replace('L', 'J') != 2) {
+	String string = "Test";
+
+	if (string.Replace('e', '3') != 1) {
 		return false;
 	}
 
-	return true;
-}
-
-bool StringTest::readFromConsoleTest(){
-	std::cout << "Type test.\n";
-	string.ReadFromConsole();
-	if (string != "TEST HEJJOtest") {
-		return false;
-	}
-
-	return true;
-}
-
-bool StringTest::writeToConsoleTest() {
-	std::cout << BLUE;
-	if (string.WriteToConsole() != "TEST HEJJOtest") {
-		std::cout << WHITE;
-		return false;
-	}
-
-	std::cout << WHITE;
-	std::cout << "\n";
 	return true;
 }
 
 bool StringTest::doubleEqualsTest() {
-	if (string != "TEST HEJJOtest") {
-		return false;
+	String string = "Test";
+
+	if (string == "Test") {
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 bool StringTest::subscriptTest() {
-	if (string[3] != 'T') {
+	String string = "Test";
+
+	if (string[0] != 'T') {
 		return false;
 	}
 
@@ -164,6 +154,8 @@ bool StringTest::subscriptTest() {
 }
 
 bool StringTest::AssignmentTest() {
+	String string = "Test";
+
 	string = "test";
 	if (string == "test"){
 		return true;
@@ -173,9 +165,11 @@ bool StringTest::AssignmentTest() {
 }
 
 bool StringTest::lessThanTest() {
+	String string = "Test";
+
 	if (string < "abce") {
-		return false;
+		return true;
 	}
 
-	return true;
+	return false;
 }

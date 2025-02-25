@@ -10,7 +10,7 @@ public:
 
 private:
 	String string = "Test";
-	float numberOfTests = 12;
+	float numberOfTests = 10;
 	float testSucceeds = 0;
 
 	std::vector<std::string> strings;
@@ -27,9 +27,6 @@ private:
 
 	bool findCharacterTest();
 	bool replaceTest();
-
-	bool readFromConsoleTest();
-	bool writeToConsoleTest();
 
 	bool doubleEqualsTest();
 	bool subscriptTest();

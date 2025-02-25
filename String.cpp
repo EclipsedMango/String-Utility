@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cctype>
+#include <cstring>
 
 // Constructors
 
@@ -29,6 +30,12 @@ String::String(const char* _str) {
 	string = new char[size + 1];
 
 	strcpy(string, _str);
+}
+
+String::~String() {
+	if (string != nullptr) {
+		delete[] string;
+	}
 }
 
 // Utility Functions
@@ -76,7 +83,7 @@ String& String::ToUpper() {
 }
 
 // Iterate through string and check it the char matches anything in string.
-int String::FindCharacter(const char _chr) {
+int String::FindCharacter(const char _chr) const {
 	for (size_t i = 0; i < size; ++i) {
 		if (string[i] == _chr) {
 			return i;
@@ -138,6 +145,15 @@ String& String::WriteToConsole() {
 	return *this;
 }
 
+const String& String::WriteToConsole() const {
+	if (string == nullptr) {
+		return *this;
+	}
+
+	std::cout << string;
+	return *this;
+}
+
 // Goes through each character and compares them then returns false if characters don't match.
 bool String::operator==(const String& _other) const {
 	if (string == nullptr || _other.string == nullptr) {
@@ -164,17 +180,17 @@ bool String::operator!=(const String& _other) const {
 	for (size_t i = 0; i < _other.size; ++i) {
 		if (string[i] != '\0' && _other.string[i] != '\0') {
 			if (string[i] != _other.string[i]) {
-				return false;
+				return true;
 			}
 		}
 	}
 
-	return true;
+	return false;
 }
 
 // Finds the character at index, returns Null Terminated if index is too big or small.
 char& String::operator[](size_t _index) {
-	if (_index > 0 && _index <= size - 1) {
+	if (_index >= 0 && _index <= size - 1) {
 		return string[_index];
 	}
 
@@ -183,7 +199,7 @@ char& String::operator[](size_t _index) {
 
 // Finds the character at index, returns Null Terminated if index is too big or small.
 const char& String::operator[](size_t _index) const {
-	if (_index > 0 && _index <= size - 1) {
+	if (_index >= 0 && _index <= size - 1) {
 		return string[_index];
 	}
 
@@ -212,7 +228,7 @@ String& String::operator=(const String& _str) {
 }
 
 // Compare each char to each other in alphabetical order return true if right char is lower.
-bool String::operator<(const String& _str) {
+bool String::operator<(const String& _str) const {
 	if (string == nullptr || _str.string == nullptr) {
 		return false;
 	}

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+
 class String {
 public:
 	// Create a string with a size and null termination character.
@@ -11,7 +13,7 @@ public:
 	// Copy the string to _other.
 	String(const String& _other);
 	
-	~String() = default;
+	~String();
 
 public:
 	// Find the length then return that length.
@@ -27,7 +29,7 @@ public:
 	String& ToUpper();
 
 	// Iterate through string and check it the char matches anything in string.
-	int FindCharacter(const char _chr);
+	int FindCharacter(const char _chr) const;
 
 	// If the characters exist in the string then replace them.
 	int Replace(const char _find, const char _replace);
@@ -37,6 +39,7 @@ public:
 
 	// Iterates through characters and writes them to console until null termination character.
 	String& WriteToConsole();
+	const String& WriteToConsole() const;
 
 	// Goes through each character and compares them then returns false if characters don't match.
 	bool operator==(const String& _other) const;
@@ -50,7 +53,7 @@ public:
 	String& operator=(const String& _str);
 
 	// Compare each char to each other in alphabetical order return true if right char is lower.
-	bool operator<(const String& _str);
+	bool operator<(const String& _str) const;
 
 private:
 	char* string;
