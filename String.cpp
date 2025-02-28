@@ -8,7 +8,7 @@
 
 // Create a string with a size and null termination character.
 String::String() {
-	string = nullptr;
+	string = new char[1]{};
 	size = 0;
 }
 
@@ -42,7 +42,7 @@ String::~String() {
 
 // Find the length then return that length.
 size_t String::Length() const {
-	return strlen(string);
+	return size;
 }
 
 // Check the size of the string, add to it if needed and add the other string.
@@ -156,36 +156,22 @@ const String& String::WriteToConsole() const {
 
 // Goes through each character and compares them then returns false if characters don't match.
 bool String::operator==(const String& _other) const {
-	if (string == nullptr || _other.string == nullptr) {
+	if (size != _other.size) {
 		return false;
 	}
 
 	for (size_t i = 0; i < _other.size; ++i) {
-		if (string[i] != '\0' && _other.string[i] != '\0') {
-			if (string[i] == _other.string[i]) {
-				return true;
-			}
+		if (string[i] != _other.string[i]) {
+			return false;
 		}
 	}
 
-	return false;
+	return true;
 }
 
 // Goes through each character and compares them then returns false if characters don't match.
 bool String::operator!=(const String& _other) const {
-	if (string == nullptr || _other.string == nullptr) {
-		return false;
-	}
-
-	for (size_t i = 0; i < _other.size; ++i) {
-		if (string[i] != '\0' && _other.string[i] != '\0') {
-			if (string[i] != _other.string[i]) {
-				return true;
-			}
-		}
-	}
-
-	return false;
+	return !(*this == _other.string);
 }
 
 // Finds the character at index, returns Null Terminated if index is too big or small.
@@ -229,18 +215,13 @@ String& String::operator=(const String& _str) {
 
 // Compare each char to each other in alphabetical order return true if right char is lower.
 bool String::operator<(const String& _str) const {
-	if (string == nullptr || _str.string == nullptr) {
-		return false;
-	}
+	for (size_t i = 0; i < size + 1; ++i) {
+		if (string[i] < _str[i]) {
+			return true;
+		}
 
-	for (size_t i = 0; i < size; ++i) {
-		if (string[i] != '\0' && _str[i] != '\0') {
-			if (string[i] < _str[i]) {
-				return true;
-			}
-			else {
-				return false;
-			}
+		if (string[i] != _str[i]) {
+			return false;
 		}
 	}
 
