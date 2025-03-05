@@ -42,7 +42,7 @@ void StringTest::testTemplate(std::string msg, bool condition) {
 
 void StringTest::saveToFile() {
 	std::ofstream MyFile;
-	MyFile.open("C:/Users/s242072/source/repos/String Utility/StringUtilityTestResults.txt", std::ofstream::app);
+	MyFile.open("StringUtilityTestResults.txt", std::ofstream::app);
 
 	time_t myTime = time(nullptr);
 	std::tm time = *std::localtime(&myTime);
